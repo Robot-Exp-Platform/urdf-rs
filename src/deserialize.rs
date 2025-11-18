@@ -489,7 +489,6 @@ pub struct Robot {
 }
 
 impl Robot {
-
     /// Convert Robot into RobotTree
     /// RobotTree is a tree structure of Robot, which makes it easier to traverse the robot structure.
     /// you can use `Robot::into_tree` to convert Robot into RobotTree.
@@ -501,7 +500,9 @@ impl Robot {
         );
 
         let mut links_iter = self.links.into_iter();
-        let root_link = links_iter.next().expect("checked above for at least one link");
+        let root_link = links_iter
+            .next()
+            .expect("checked above for at least one link");
         let mut link_map: HashMap<String, Link> =
             links_iter.map(|link| (link.name.clone(), link)).collect();
 
@@ -516,7 +517,10 @@ impl Robot {
         let tree = build_robot_tree(root_link, &mut link_map, &mut adjacency);
 
         if let Some(orphan) = link_map.keys().next() {
-            panic!("Unreachable link `{}` found while building RobotTree", orphan);
+            panic!(
+                "Unreachable link `{}` found while building RobotTree",
+                orphan
+            );
         }
         if let Some(orphan_parent) = adjacency.keys().next() {
             panic!(
@@ -528,7 +532,6 @@ impl Robot {
         tree
     }
 }
-
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct RobotTree {
