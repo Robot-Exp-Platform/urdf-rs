@@ -202,7 +202,7 @@ mod tests {
         }
         match &link.visual[1].geometry {
             Geometry::Mesh {
-                ref filename,
+                filename,
                 scale,
             } => {
                 assert_eq!(filename, "aa.dae");
@@ -212,7 +212,7 @@ mod tests {
         }
         match &link.visual[2].geometry {
             Geometry::Mesh {
-                ref filename,
+                filename,
                 scale,
             } => {
                 assert_eq!(filename, "bbb.dae");
